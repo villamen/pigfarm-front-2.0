@@ -48,7 +48,7 @@
             <input v-model.number="cerdoEdit.peso" type="float" step="0.01" />
 
             <div class="botones">
-              <button type="submit">Guardar</button>
+              <button type="submit">💾 Guardar</button>
               <button type="button" @click="cerrarModal">Cancelar</button>
             </div>
           </form>
@@ -241,7 +241,8 @@ export default {
 }
 
 .botones button:hover {
-  background-color: #2563eb;
+   background-color: #15b1ca;
+  color: white;
   transform: scale(1.05); /* Efecto de agrandamiento leve */
 }
 

@@ -42,7 +42,6 @@
           <th>ID</th>
           <th>Nombre</th>
           <th>Descripción</th>
-          <th>Fecha vencimiento</th>
           <th>Creación</th>
           <th>Modificación</th>
           <th>Acciones</th>
@@ -53,7 +52,7 @@
           <td>{{ vacuna.id_vacuna }}</td>
           <td>{{ vacuna.nombre }}</td>
           <td>{{ vacuna.descripcion }}</td>
-          <td>{{ vacuna.fecha_vencimiento }}</td>
+          <!-- <td>{{ vacuna.fecha_vencimiento }}</td> -->
           <td>{{ vacuna.fecha_creacion }}</td>
           <td>{{ vacuna.fecha_modificacion || '-' }}</td>
           <td>

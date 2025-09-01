@@ -29,7 +29,7 @@
     <!-- CONTROLES -->
     <div class="controls">
       <div class="search-bar">
-        <input v-model="busquedaId" @input="filtrarPorId" placeholder="Buscar por ID del cerdo..." />
+        <input v-model="busquedaId" @input="filtrarPorId" placeholder="Numero identificativo" />
       </div>
       <div class="action-buttons">
         <button @click="irAvacunas">+ Consultar vacunas</button>
@@ -41,28 +41,29 @@
     <table class="tabla-cerdos">
       <thead>
         <tr>
-          <th>ID</th>
+        <th>Numero-identificativo</th>
           <th>Descripción</th>
           <th>Disponible</th>
           <th>Edad (meses)</th>
           <th>Peso</th>
           <th>Raza</th>
-          <th>Fecha creación</th>
+          <!-- <th>Fecha creación</th> -->
           <th>Ingreso</th>
           <th>Modificación</th>
           <th>Salida</th>
           <th>Modificado por</th>
         </tr>
       </thead>
-      <tbody>
+   <tbody>
         <tr v-for="cerdo in cerdosFiltrados" :key="cerdo.id" @click="mostrarModal(cerdo)">
-          <td>{{ cerdo.id }}</td>
+          <!-- <td>{{ cerdo.id }}</td> -->
+          <td>{{ cerdo.numero_arete }}</td>
           <td>{{ cerdo.descripcion }}</td>
           <td>{{ cerdo.disponible ? 'Sí' : 'No' }}</td>
           <td>{{ cerdo.edad }}</td>
           <td>{{ cerdo.peso }}</td>
           <td>{{ cerdo.raza }}</td>
-          <td>{{ cerdo.fecha_creacion }}</td>
+          <!-- <td>{{ cerdo.fecha_creacion }}</td> -->
           <td>{{ cerdo.fecha_ingreso }}</td>
           <td>{{ cerdo.fecha_modificacion || '-' }}</td>
           <td>{{ cerdo.fecha_salida || '-' }}</td>
@@ -74,7 +75,7 @@
     <!-- MODAL DETALLES -->
     <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
       <div class="modal-content">
-        <h2>Detalles del Cerdo</h2>
+        <h2>Detalles del Cerdo 🐷</h2>
         <p><strong>ID:</strong> {{ cerdoSeleccionado.id }}</p>
         <p><strong>Descripción:</strong> {{ cerdoSeleccionado.descripcion }}</p>
         <p><strong>Edad:</strong> {{ cerdoSeleccionado.edad }} meses</p>
@@ -86,9 +87,9 @@
 
         <div class="modal-actions">
           <button class="editar-btn" @click="mostrarVacunas(cerdoSeleccionado.id)">💉 Ver vacunas</button>
-          <button class="editar-btn" @click="abrirModalVacunar">Aplicar vacuna</button>
+          <button class="editar-btn" @click="abrirModalVacunar">💊 Aplicar vacuna</button>
 
-          <button class="editar-btn" @click="cerrarModal">Cerrar</button>
+          <button class="editar-btn" @click="cerrarModal">❌ Cerrar</button>
         </div>
       </div>
     </div>
@@ -102,10 +103,19 @@
     <!-- MODAL APLICAR VACUNA -->
     <div v-if="modalVacunarVisible" class="modal-overlay" @click.self="cerrarModalVacunar">
       <div class="modal-content-agregar">
-        <h2>Aplicar Vacuna rhgh</h2>
+        <h2>Aplicar Vacuna 💉</h2>
         <form @submit.prevent="aplicarVacuna">
-          <label>ID de la vacuna:</label>
-          <input type="number" v-model.number="nuevaVacuna.id_vacuna" required />
+          <!-- <label>ID de la vacuna:</label>
+          <input type="number" v-model.number="nuevaVacuna.id_vacuna" required /> -->
+          <label>Vacuna:</label>
+          
+          <select v-model="nuevaVacuna.id_vacuna" required>
+            <option disabled value="">-- Selecciona una vacuna --</option>
+            <option v-for="vacuna in vacunasDisponibles" :key="vacuna.id_vacuna" :value="vacuna.id_vacuna">
+              {{ vacuna.nombre }}
+            </option>
+          </select>
+
 
           <label>Fecha de aplicación:</label>
           <input type="date" v-model="nuevaVacuna.fecha_aplicacion" required />
@@ -124,7 +134,7 @@
     <!-- MODAL VACUNAS -->
     <div v-if="modalVacunasVisible" class="modal-overlay" @click.self="cerrarModalVacunas">
       <div class="modal-vacunas-content">
-        <h2>Historial de Vacunas</h2>
+        <h2>Historial de Vacunas ⏳</h2>
         <div v-if="vacunas.length > 0" class="vacunas-scroll">
           <ul>
             <li v-for="vacuna in vacunas" :key="vacuna.id_aplicacion">
@@ -138,7 +148,7 @@
         <div v-else>
           <p>El animal no tiene vacunas aplicadas.</p>
         </div>
-        <button class="editar-btn" @click="cerrarModalVacunas">Cerrar</button>
+        <button class="editar-btn" @click="cerrarModalVacunas">❌ Cerrar</button>
       </div>
     </div>
 
@@ -152,7 +162,7 @@
   </div>
 </template>
 <script>
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 import RegistrarVacunaModal from '@/components/RegistrarVacunaModal.vue';
 
 export default {
@@ -174,6 +184,7 @@ export default {
 
       cerdoSeleccionado: {},
       vacunas: [],
+      //vacunasDisponibles: [],
       modalVacunarVisible: false,
       listaVacunas: [],
       nuevaVacuna: {
@@ -292,6 +303,7 @@ export default {
     async aplicarVacuna() {
       const token = localStorage.getItem('token');
       try {
+        this.obtenerVacunasDisponibles();
         const res = await fetch('http://localhost:5000/aplicaciones', {
           method: 'POST',
           headers: {
@@ -317,7 +329,7 @@ export default {
           this.cerrarModalVacunar();
         } else {
           // alert(data.error || 'Error al aplicar vacuna');
-           Swal.fire({
+          Swal.fire({
             icon: 'error',
             title: 'Error',
             text: data.error || 'Error al aplicar vacuna',
@@ -326,11 +338,11 @@ export default {
         }
       } catch {
         Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: data.error || 'Error de conexión',
-            confirmButtonColor: '#d33'
-          });
+          icon: 'error',
+          title: 'Error',
+          text: data.error || 'Error de conexión',
+          confirmButtonColor: '#d33'
+        });
       }
     },
 
@@ -525,17 +537,27 @@ main {
   border-bottom: 1px solid #e0e0e0;
 }
 
+.tabla-cerdos tbody tr {
+  cursor: pointer; /* Hace que aparezca la manito */
+}
+
+.tabla-cerdos tbody tr:hover {
+  background-color: #f5f5f5; /* Opcional: resalta la fila al pasar el mouse */
+}
+
+
 .editar-btn {
   background: none;
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
   transition: transform 0.2s;
+  background-color: #0055aa;
 }
 
 .editar-btn:hover {
   transform: scale(1.2);
-  color: #1976d2;
+  background-color: #1976d2;
 }
 
 /* MODAL */
@@ -588,7 +610,17 @@ main {
   max-width: 90%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
   animation: slideUp 0.3s ease-out forwards;
+  
 }
+.modal-content p {
+  padding: 0.1rem 0.75rem;
+  border: 0.5px solid #ccc;
+  border-radius: 6px;
+  margin: 0rem 0;
+  background-color: #fafafa; /* opcional, resalta */
+}
+
+
 
 
 .modal-content-eliminar {
@@ -641,6 +673,11 @@ main {
   margin-right: 20px;
 }
 
+.modal-content h2{
+ 
+  font-weight: 100;
+}
+
 .modal-content button {
   margin-top: 1rem;
   margin-right: 0.5rem;
@@ -668,6 +705,7 @@ main {
   font-family: 'Lilita one';
   font-size: 35px;
   margin-bottom: 50px;
+  font-weight: 100;
 }
 
 .modal-vacunas-content p {
@@ -692,7 +730,7 @@ main {
   margin-top: 1rem;
   margin-right: 0.5rem;
   padding: 0.5rem 1.5rem;
-  background-color: #1976d2;
+  background-color: #0055aa;
   color: white;
   border: none;
   border-radius: 6px;
@@ -728,6 +766,10 @@ main {
   font-size: 2.1875rem;
   color: black;
   font-family: 'Lilita one';
+  font-weight: 100;
+}
+.modal-content-agregar button{
+  background-color: #0055aa;
 }
 
 .modal-content-agregar input,
@@ -745,7 +787,7 @@ main {
 .modal-content-agregar input:focus,
 .modal-content-agregar select:focus,
 .modal-content-agregar textarea:focus {
-  border-color: #3bd6ef;
+  border-color: #0055aa;
   box-shadow: 0 0 0 3px rgba(59, 214, 239, 0.3);
   outline: none;
 }
@@ -766,10 +808,16 @@ main {
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
+   transition: background-color 0.2s;
 }
 
 .form-buttons button:first-child {
-  background-color: #3bd6ef;
+  background-color: #0055aa;
+  color: white;
+}
+
+.form-buttons button:hover {
+  background-color: #15b1ca;
   color: white;
 }
 
@@ -813,8 +861,9 @@ main {
 
 /* footer */
 .footer {
-  display:block;
-  background-color: white; /* gris oscuro */
+  display: block;
+  background-color: white;
+  /* gris oscuro */
   color: black;
   text-align: center;
   padding: 1rem;
@@ -826,7 +875,7 @@ main {
   width: 100%;
 }
 
-.footer .nombre{
+.footer .nombre {
   font-family: 'Lilita one';
 }
 </style>

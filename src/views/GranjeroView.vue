@@ -130,7 +130,7 @@
     <!-- MODAL DETALLES -->
     <div v-if="modalVisible" class="modal-overlay" @click.self="cerrarModal">
       <div class="modal-content">
-        <h2>Detalles del Cerdo</h2>
+        <h2>Detalles del Cerdo 🐷</h2>
         <p><strong>ID:</strong> {{ cerdoSeleccionado.id }}</p>
         <p><strong>Descripción:</strong> {{ cerdoSeleccionado.descripcion }}</p>
         <p><strong>Edad:</strong> {{ cerdoSeleccionado.edad }} meses</p>
@@ -141,11 +141,11 @@
         <p><strong>Modificado por:</strong> {{ cerdoSeleccionado.modificado_por || '-' }}</p>
 
         <div class="modal-actions">
-          <button class="editar-btn" @click="abrirModalEditar(cerdoSeleccionado)">Editar</button>
-          <button class="editar-btn" @click="abrirConfirmacionEliminar"> Eliminar</button>
+          <button class="editar-btn" @click="abrirModalEditar(cerdoSeleccionado)">✏️ Editar</button>
+          <button class="editar-btn" @click="abrirConfirmacionEliminar">🗑️ Eliminar</button>
           <button class="editar-btn" @click="mostrarVacunas(cerdoSeleccionado.id)">💉 Ver vacunas</button>
           <!-- <button class="editar-btn" @click="consultarVacunas(cerdoSeleccionado.id)"> Ver vacunas</button> -->
-          <button class="editar-btn" @click="cerrarModal">Cerrar</button>
+          <button class="editar-btn" @click="cerrarModal">❌ Cerrar</button>
         </div>
       </div>
     </div>
@@ -633,6 +633,13 @@ main {
   border-bottom: 1px solid #e0e0e0;
 }
 
+.tabla-cerdos tbody tr {
+  cursor: pointer; /* Hace que aparezca la manito */
+}
+
+.tabla-cerdos tbody tr:hover {
+  background-color: #f5f5f5; /* Opcional: resalta la fila al pasar el mouse */
+}
 .editar-btn {
   color: #0055aa;
   background: none;
@@ -697,6 +704,16 @@ main {
   max-width: 90%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
   animation: slideUp 0.3s ease-out forwards;
+}
+.modal-content h2{
+  font-weight: 100;
+}
+.modal-content p {
+  padding: 0.1rem 0.75rem;
+  border: 0.5px solid #ccc;
+  border-radius: 6px;
+  margin: 0rem 0;
+  background-color: #fafafa; /* opcional, resalta */
 }
 
 

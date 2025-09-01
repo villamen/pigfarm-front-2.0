@@ -19,9 +19,9 @@
             <br>
             <label>Descripción:</label>
             <textarea v-model="nuevaVacuna.descripcion" rows="3" cols="30"></textarea>
-            <br>
+            <!-- <br>
             <label>Fecha de vencimiento:</label>
-            <input v-model="nuevaVacuna.fecha_vencimiento" type="date" required />
+            <input v-model="nuevaVacuna.fecha_vencimiento" type="date" required /> -->
             <br>
             <div class="botones">
               <button type="submit">Guardar</button>
