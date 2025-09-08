@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     const token = localStorage.getItem('token');
-    axios.get('http://localhost:5000/alertas/proximas-vacunas', {
+    axios.get('https://pigfarm-back-2-0.onrender.com/alertas/proximas-vacunas', {
       headers: {
         Authorization: `Bearer ${token}`,
       }

@@ -109,7 +109,7 @@ export default {
     },
     async obtenerVacunas() {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/vacunas', {
+      const res = await fetch('https://pigfarm-back-2-0.onrender.com/vacunas', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -118,7 +118,7 @@ export default {
     async eliminarVacuna(id) {
       if (!confirm('¿Estás seguro de eliminar esta vacuna?')) return;
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/vacunas/${id}`, {
+      const res = await fetch(`https://pigfarm-back-2-0.onrender.com/vacunas/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });

@@ -143,7 +143,7 @@ export default {
     async confirmarEliminacionUsuario() {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`http://localhost:5000/usuarios/${this.usuarioSeleccionado.id}`, {
+        const res = await fetch(`https://pigfarm-back-2-0.onrender.com/usuarios/${this.usuarioSeleccionado.id}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -202,7 +202,7 @@ export default {
     },
     async obtenerUsuarios() {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/usuarios', {
+      const res = await fetch('https://pigfarm-back-2-0.onrender.com/usuarios', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -215,7 +215,7 @@ export default {
     async eliminarUsuario(usuario) {
       if (!confirm(`¿Estás seguro de eliminar a ${usuario.nombre}?`)) return;
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://localhost:5000/usuarios/${usuario.rol}/${usuario.id}`, {
+      const res = await fetch(`https://pigfarm-back-2-0.onrender.com/usuarios/${usuario.rol}/${usuario.id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });

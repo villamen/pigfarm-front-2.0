@@ -35,7 +35,7 @@ export default {
 
     async iniciarSesion() {
       try {
-        const res = await fetch('http://localhost:5000/login', {
+        const res = await fetch('https://pigfarm-back-2-0.onrender.com/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

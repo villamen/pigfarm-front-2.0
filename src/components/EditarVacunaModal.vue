@@ -17,8 +17,8 @@
             <label>Descripción:</label>
             <textarea v-model="vacunaEdit.descripcion" required rows="3" cols="30"></textarea>
             <br>
-            <label>Fecha de vencimiento:</label>
-            <input type="date" v-model="vacunaEdit.fecha_vencimiento" required />
+            <!-- <label>Fecha de vencimiento:</label>
+            <input type="date" v-model="vacunaEdit.fecha_vencimiento" required /> -->
             <br>
             <div class="botones">
               <button type="submit">Guardar</button>
@@ -54,7 +54,7 @@ export default {
     async editarVacuna() {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`http://localhost:5000/vacunas/${this.vacunaEdit.id_vacuna}`, {
+        const res = await fetch(`https://pigfarm-back-2-0.onrender.com/vacunas/${this.vacunaEdit.id_vacuna}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

@@ -74,7 +74,7 @@ export default {
     async guardarCambios() {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`http://localhost:5000/usuarios/${this.usuario.id}`
+        const res = await fetch(`https://pigfarm-back-2-0.onrender.com/usuarios/${this.usuario.id}`
           , {
             method: 'PUT',
             headers: {

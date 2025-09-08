@@ -51,7 +51,7 @@ export default {
     async guardarVacuna() {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch('http://localhost:5000/vacunas', {
+        const res = await fetch('https://pigfarm-back-2-0.onrender.com/vacunas', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

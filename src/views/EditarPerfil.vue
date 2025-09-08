@@ -104,7 +104,7 @@ export default {
     },
     async obtenerDatos() {
       const token = localStorage.getItem('token')
-      const res = await fetch('http://localhost:5000/perfil', {
+      const res = await fetch('https://pigfarm-back-2-0.onrender.com/perfil', {
         headers: { Authorization: `Bearer ${token}` }
       })
       const data = await res.json()
@@ -116,7 +116,7 @@ export default {
       const datos = { ...this.usuario }
       if (!datos.password) delete datos.password
 
-      const res = await fetch('http://localhost:5000/perfil', {
+      const res = await fetch('https://pigfarm-back-2-0.onrender.com/perfil', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

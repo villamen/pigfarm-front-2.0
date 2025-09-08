@@ -234,7 +234,7 @@ export default {
     },
     async obtenerCerdos() {
       const token = localStorage.getItem('token')
-      const res = await fetch('http://localhost:5000/cerdos', {
+      const res = await fetch('https://pigfarm-back-2-0.onrender.com/cerdos', {
         headers: { Authorization: `Bearer ${token}` }
       })
       const data = await res.json()
@@ -273,7 +273,7 @@ export default {
 
     async mostrarVacunas(id) {
       const token = localStorage.getItem('token')
-      const res = await fetch(`http://localhost:5000/cerdos/${id}/historial`, {
+      const res = await fetch(`https://pigfarm-back-2-0.onrender.com/cerdos/${id}/historial`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -290,7 +290,7 @@ export default {
     async obtenerVacunasDisponibles() {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch('http://localhost:5000/vacunas', {
+        const res = await fetch('https://pigfarm-back-2-0.onrender.com/vacunas', {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -304,7 +304,7 @@ export default {
       const token = localStorage.getItem('token');
       try {
         this.obtenerVacunasDisponibles();
-        const res = await fetch('http://localhost:5000/aplicaciones', {
+        const res = await fetch('https://pigfarm-back-2-0.onrender.com/aplicaciones', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

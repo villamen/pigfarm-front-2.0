@@ -65,7 +65,7 @@
           <th>Edad (meses)</th>
           <th>Peso</th>
           <th>Raza</th>
-          <th>Fecha creación</th>
+          <!-- <th>Fecha creación</th> -->
           <th>Ingreso</th>
           <th>Modificación</th>
           <th>Salida</th>
@@ -81,7 +81,7 @@
           <td>{{ cerdo.edad }}</td>
           <td>{{ cerdo.peso }}</td>
           <td>{{ cerdo.raza }}</td>
-          <td>{{ cerdo.fecha_creacion }}</td>
+          <!-- <td>{{ cerdo.fecha_creacion }}</td> -->
           <td>{{ cerdo.fecha_ingreso }}</td>
           <td>{{ cerdo.fecha_modificacion || '-' }}</td>
           <td>{{ cerdo.fecha_salida || '-' }}</td>
@@ -137,7 +137,7 @@
         <p><strong>Peso:</strong> {{ cerdoSeleccionado.peso }} kg</p>
         <p><strong>Raza:</strong> {{ cerdoSeleccionado.raza }}</p>
         <p><strong>Ingreso:</strong> {{ cerdoSeleccionado.fecha_ingreso }}</p>
-        <p><strong>Creación:</strong> {{ cerdoSeleccionado.fecha_creacion }}</p>
+        <!-- <p><strong>Creación:</strong> {{ cerdoSeleccionado.fecha_creacion }}</p> -->
         <p><strong>Modificado por:</strong> {{ cerdoSeleccionado.modificado_por || '-' }}</p>
 
         <div class="modal-actions">
@@ -274,7 +274,7 @@ export default {
 
     async obtenerCerdos() {
       const token = localStorage.getItem('token')
-      const res = await fetch('http://localhost:5000/cerdos', {
+      const res = await fetch('https://pigfarm-back-2-0.onrender.com/cerdos', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -323,7 +323,7 @@ export default {
     async agregarCerdo() {
       const token = localStorage.getItem('token')
       try {
-        const res = await fetch('http://localhost:5000/cerdos', {
+        const res = await fetch('https://pigfarm-back-2-0.onrender.com/cerdos', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -366,7 +366,7 @@ export default {
     async confirmarEliminacion() {
       const token = localStorage.getItem('token')
       try {
-        const res = await fetch(`http://localhost:5000/cerdos/${this.cerdoSeleccionado.id}`, {
+        const res = await fetch(`https://pigfarm-back-2-0.onrender.com/cerdos/${this.cerdoSeleccionado.id}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`
@@ -403,7 +403,7 @@ export default {
     },
     async mostrarVacunas(id) {
       const token = localStorage.getItem('token')
-      const res = await fetch(`http://localhost:5000/cerdos/${id}/historial`, {
+      const res = await fetch(`https://pigfarm-back-2-0.onrender.com/cerdos/${id}/historial`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -419,7 +419,7 @@ export default {
 
     async descargarReporte() {
       const token = localStorage.getItem('token');
-      let url = 'http://localhost:5000/reporte-mensual';
+      let url = 'https://pigfarm-back-2-0.onrender.com/reporte-mensual';
 
       if (this.mesSeleccionado) {
         // mesSeleccionado está en formato "YYYY-MM"

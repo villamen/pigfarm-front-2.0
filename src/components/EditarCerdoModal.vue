@@ -83,7 +83,7 @@ export default {
     async guardarCambios() {
       const token = localStorage.getItem('token')
       try {
-        const res = await fetch(`http://localhost:5000/cerdos/${this.cerdoEdit.id}`, {
+        const res = await fetch(`https://pigfarm-back-2-0.onrender.com/cerdos/${this.cerdoEdit.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
