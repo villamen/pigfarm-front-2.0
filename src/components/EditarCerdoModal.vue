@@ -10,7 +10,7 @@
 
         <!-- FORMULARIO DE EDICIÓN -->
         <div class="formulario-edicion">
-          <h2>Editar Cerdo</h2>
+          <h2>Editar Cerdo.</h2>
           <form @submit.prevent="guardarCambios">
             <label>Raza:</label>
             <br>
